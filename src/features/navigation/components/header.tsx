@@ -9,6 +9,7 @@ import { useAppSelector } from "@/app/hooks";
 import { LoginModal } from "@/features/auth/components/login-modal";
 import { getFirebaseAuth } from "@/features/auth/services/firebase-client";
 import { CartDrawer } from "@/features/cart/components/cart-drawer";
+import { MobileCartBubble } from "@/features/cart/components/mobile-cart-bubble";
 import { selectCartTotals } from "@/features/cart/store/cart-slice";
 import { headerCopy } from "@/features/navigation/data/header-data";
 import { navItems } from "@/features/navigation/data/nav-items";
@@ -191,12 +192,6 @@ export function Header() {
               </span>
             )}
           </button>
-          <button
-            className="rounded border border-white/10 px-4 py-3 text-left text-sm font-bold text-white/80"
-            onClick={openCart}
-          >
-            {headerCopy.cartLabel} {itemCount > 0 ? `(${itemCount})` : ""}
-          </button>
           {user && (
             <button
               className="flex items-center gap-3 rounded border border-white/10 px-4 py-3 text-left text-sm font-bold text-white/80 transition hover:border-red-300 hover:text-red-200"
@@ -209,6 +204,7 @@ export function Header() {
         </nav>
       </div>
 
+      <MobileCartBubble onOpen={openCart} />
       <ProductSearchModal isOpen={isSearchOpen} onOpenChange={setIsSearchOpen} />
       <LoginModal isOpen={isLoginOpen} onOpenChange={setIsLoginOpen} />
       <CartDrawer isOpen={isCartOpen} onOpenChange={setIsCartOpen} />
