@@ -3,6 +3,7 @@
 import { SlidersHorizontal } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import { ProductComparePanel } from "@/features/products/components/product-compare-panel";
 import { ProductCard } from "@/features/products/components/product-card";
 import {
   categoryLabels,
@@ -56,6 +57,7 @@ export function ProductExplorer() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+        <ProductComparePanel />
       </div>
     </section>
   );

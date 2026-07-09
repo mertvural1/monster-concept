@@ -10,6 +10,7 @@ import { CartDrawer } from "@/features/cart/components/cart-drawer";
 import { useCart } from "@/features/cart/context/cart-context";
 import { headerCopy } from "@/features/navigation/data/header-data";
 import { navItems } from "@/features/navigation/data/nav-items";
+import { ProductSearchModal } from "@/features/products/components/product-search-modal";
 import { AppRoute } from "@/shared/enums/app-route.enum";
 import { UiCopy } from "@/shared/enums/ui-copy.enum";
 import { cn } from "@/shared/utils/cn";
@@ -18,6 +19,7 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { user } = useAuth();
   const { itemCount } = useCart();
 
@@ -29,6 +31,11 @@ export function Header() {
   const openCart = () => {
     setIsOpen(false);
     setIsCartOpen(true);
+  };
+
+  const openSearch = () => {
+    setIsOpen(false);
+    setIsSearchOpen(true);
   };
 
   return (
@@ -58,6 +65,7 @@ export function Header() {
           <button
             className="grid size-10 place-items-center rounded border border-white/10 text-white/75 transition hover:border-acid hover:text-acid"
             aria-label={headerCopy.searchAriaLabel}
+            onClick={openSearch}
           >
             <Search size={18} />
           </button>
@@ -114,6 +122,12 @@ export function Header() {
           ))}
           <button
             className="rounded border border-white/10 px-4 py-3 text-left text-sm font-bold text-white/80"
+            onClick={openSearch}
+          >
+            {headerCopy.searchAriaLabel}
+          </button>
+          <button
+            className="rounded border border-white/10 px-4 py-3 text-left text-sm font-bold text-white/80"
             onClick={openLogin}
           >
             {user ? headerCopy.accountAriaLabel : headerCopy.googleLoginLabel}
@@ -127,6 +141,7 @@ export function Header() {
         </nav>
       </div>
 
+      <ProductSearchModal isOpen={isSearchOpen} onOpenChange={setIsSearchOpen} />
       <LoginModal isOpen={isLoginOpen} onOpenChange={setIsLoginOpen} />
       <CartDrawer isOpen={isCartOpen} onOpenChange={setIsCartOpen} />
     </header>

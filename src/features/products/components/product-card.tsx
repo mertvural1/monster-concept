@@ -6,14 +6,20 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { useCart } from "@/features/cart/context/cart-context";
+import { useCompare } from "@/features/products/context/compare-context";
+import { compareCopy } from "@/features/products/data/product-compare-data";
 import { productCardCopy } from "@/features/products/data/product-card-data";
 import type { ProductCardProps } from "@/features/products/interfaces/product-card-props.interface";
+import { cn } from "@/shared/utils/cn";
 import { formatCurrency } from "@/shared/utils/format-currency";
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addItem, lastAddedProductId } = useCart();
+  const { isSelected, toggleProduct, canAddMore } = useCompare();
   const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
   const isLastAdded = lastAddedProductId === product.id;
+  const isCompareSelected = isSelected(product.id);
+  const isCompareDisabled = !isCompareSelected && !canAddMore;
 
   const handleAddItem = () => {
     addItem(product);
@@ -74,13 +80,29 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <div className="mt-auto pt-6">
           <p className="text-2xl font-black text-ink">{formatCurrency(product.price)}</p>
-          <button
-            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded bg-ink px-4 py-3 text-sm font-black text-white transition hover:bg-acid hover:text-ink"
-            onClick={handleAddItem}
-          >
-            {isFeedbackVisible ? <Check size={18} /> : <ShoppingCart size={18} />}
-            {isFeedbackVisible ? productCardCopy.addedToCart : productCardCopy.addToCart}
-          </button>
+          <div className="mt-4 grid gap-2 sm:grid-cols-[1fr_auto]">
+            <button
+              className="inline-flex w-full items-center justify-center gap-2 rounded bg-ink px-4 py-3 text-sm font-black text-white transition hover:bg-acid hover:text-ink"
+              onClick={handleAddItem}
+            >
+              {isFeedbackVisible ? <Check size={18} /> : <ShoppingCart size={18} />}
+              {isFeedbackVisible ? productCardCopy.addedToCart : productCardCopy.addToCart}
+            </button>
+            <button
+              className={cn(
+                "inline-flex items-center justify-center rounded border px-4 py-3 text-sm font-black transition",
+                isCompareSelected
+                  ? "border-acid bg-acid text-ink"
+                  : "border-black/10 bg-white text-ink/62 hover:border-acid hover:text-ink",
+                isCompareDisabled && "cursor-not-allowed opacity-45",
+              )}
+              onClick={() => toggleProduct(product)}
+              disabled={isCompareDisabled}
+              title={isCompareDisabled ? compareCopy.limitLabel : compareCopy.addButton}
+            >
+              {isCompareSelected ? compareCopy.selectedButton : compareCopy.addButton}
+            </button>
+          </div>
         </div>
       </div>
     </motion.article>
