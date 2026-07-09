@@ -49,7 +49,7 @@ export function HeroSection() {
           <div className="absolute inset-x-4 bottom-6 top-10 rounded-full bg-acid/20 blur-3xl" />
           <div className="relative mx-auto flex h-full max-w-[620px] items-center justify-center">
             <Image
-              src="https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/new-mmenu-tulpar.png"
+              src="/images/products/tulpar.png"
               alt={heroSectionCopy.imageAlt}
               width={680}
               height={520}

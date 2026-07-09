@@ -9,7 +9,7 @@ export const products: Product[] = [
     family: "Abra",
     price: 39999,
     rating: 5,
-    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/new-mmenu-abra.png",
+    imageUrl: "/images/products/abra.png",
     category: ProductCategory.GAMING,
     badge: ProductBadge.BESTSELLER,
     specs: [
@@ -24,7 +24,7 @@ export const products: Product[] = [
     family: "Tulpar",
     price: 72999,
     rating: 4.8,
-    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/new-mmenu-tulpar.png",
+    imageUrl: "/images/products/tulpar.png",
     category: ProductCategory.GAMING,
     badge: ProductBadge.PERFORMANCE,
     specs: [
@@ -39,7 +39,7 @@ export const products: Product[] = [
     family: "Semruk",
     price: 129999,
     rating: 4.9,
-    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/semruk_S6_v1_400x400.png",
+    imageUrl: "/images/products/semruk.png",
     category: ProductCategory.CREATOR,
     badge: ProductBadge.NEW,
     specs: [
@@ -54,7 +54,7 @@ export const products: Product[] = [
     family: "Huma",
     price: 32999,
     rating: 4.7,
-    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/mmenunew-Huma.png",
+    imageUrl: "/images/products/huma.png",
     category: ProductCategory.BUSINESS,
     badge: ProductBadge.PORTABLE,
     specs: [
@@ -69,7 +69,7 @@ export const products: Product[] = [
     family: "Markut",
     price: 48999,
     rating: 4.6,
-    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/mmenu-markut-new.png",
+    imageUrl: "/images/products/markut.png",
     category: ProductCategory.CREATOR,
     badge: ProductBadge.NEW,
     specs: [
@@ -84,7 +84,7 @@ export const products: Product[] = [
     family: "Desktop",
     price: 84999,
     rating: 4.8,
-    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/pc-header/desktop-4.png",
+    imageUrl: "/images/products/desktop.png",
     category: ProductCategory.DESKTOP,
     badge: ProductBadge.PERFORMANCE,
     specs: [

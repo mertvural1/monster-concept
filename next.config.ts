@@ -5,10 +5,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cdn.monsternotebook.com.tr",
-      },
-      {
-        protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
     ],
