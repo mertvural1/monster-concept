@@ -146,14 +146,30 @@ export function Header() {
           </button>
         </div>
 
-        <button
-          className="grid size-10 place-items-center rounded border border-white/10 text-white lg:hidden"
-          onClick={() => setIsOpen((current) => !current)}
-          aria-label={isOpen ? headerCopy.closeMenuAriaLabel : headerCopy.openMenuAriaLabel}
-          aria-expanded={isOpen}
-        >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            className={cn(
+              "grid size-10 place-items-center rounded border transition",
+              user ? "border-acid text-acid" : "border-white/10 text-white",
+            )}
+            aria-label={user ? headerCopy.accountAriaLabel : headerCopy.loginAriaLabel}
+            onClick={openLogin}
+          >
+            {user ? (
+              <span className="text-xs font-black uppercase leading-none">{userInitials}</span>
+            ) : (
+              <UserRound size={18} />
+            )}
+          </button>
+          <button
+            className="grid size-10 place-items-center rounded border border-white/10 text-white"
+            onClick={() => setIsOpen((current) => !current)}
+            aria-label={isOpen ? headerCopy.closeMenuAriaLabel : headerCopy.openMenuAriaLabel}
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       <div
@@ -178,19 +194,6 @@ export function Header() {
             onClick={openSearch}
           >
             {headerCopy.searchAriaLabel}
-          </button>
-          <button
-            className="flex items-center justify-between gap-3 rounded border border-white/10 px-4 py-3 text-left text-sm font-bold text-white/80"
-            onClick={openLogin}
-          >
-            <span className="min-w-0 truncate">
-              {user ? user.displayName : headerCopy.googleLoginLabel}
-            </span>
-            {user && (
-              <span className="grid size-8 shrink-0 place-items-center rounded bg-acid text-xs font-black uppercase text-ink">
-                {userInitials}
-              </span>
-            )}
           </button>
           {user && (
             <button
