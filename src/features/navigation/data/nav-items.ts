@@ -2,9 +2,9 @@ import { AppRoute } from "@/shared/enums/app-route.enum";
 import type { NavItem } from "@/shared/interfaces/nav-item.interface";
 
 export const navItems: NavItem[] = [
-  { label: "Laptoplar", href: AppRoute.Products },
-  { label: "Kampanyalar", href: AppRoute.Campaigns },
-  { label: "Konfigüratör", href: AppRoute.Configurator },
-  { label: "Ekosistem", href: AppRoute.Ecosystem },
-  { label: "Destek", href: AppRoute.Support },
+  { label: "Laptoplar", href: AppRoute.PRODUCTS },
+  { label: "Kampanyalar", href: AppRoute.CAMPAIGNS },
+  { label: "Konfigüratör", href: AppRoute.CONFIGURATOR },
+  { label: "Ekosistem", href: AppRoute.ECOSYSTEM },
+  { label: "Destek", href: AppRoute.SUPPORT },
 ];

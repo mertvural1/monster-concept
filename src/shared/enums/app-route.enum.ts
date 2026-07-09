@@ -1,8 +1,8 @@
 export enum AppRoute {
-  Home = "/",
-  Products = "#products",
-  Campaigns = "#campaigns",
-  Configurator = "#configurator",
-  Ecosystem = "#ecosystem",
-  Support = "#support",
+  HOME = "/",
+  PRODUCTS = "#products",
+  CAMPAIGNS = "#campaigns",
+  CONFIGURATOR = "#configurator",
+  ECOSYSTEM = "#ecosystem",
+  SUPPORT = "#support",
 }

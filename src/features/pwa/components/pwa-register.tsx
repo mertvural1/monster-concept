@@ -12,7 +12,7 @@ export function PwaRegister() {
 
     const timeoutId = window.setTimeout(() => {
       navigator.serviceWorker.register("/sw.js").catch(() => undefined);
-    }, UiMetric.ServiceWorkerDelay);
+    }, UiMetric.SERVICE_WORKER_DELAY);
 
     return () => window.clearTimeout(timeoutId);
   }, []);

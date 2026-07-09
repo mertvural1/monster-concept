@@ -1,6 +1,6 @@
 export enum UiMetric {
-  HeaderMaxWidth = 1180,
-  ProductCardImageSize = 240,
-  CampaignLimit = 4,
-  ServiceWorkerDelay = 1200,
+  HEADER_MAX_WIDTH = 1180,
+  PRODUCT_CARD_IMAGE_SIZE = 240,
+  CAMPAIGN_LIMIT = 4,
+  SERVICE_WORKER_DELAY = 1200,
 }

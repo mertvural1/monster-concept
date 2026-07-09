@@ -1,7 +1,7 @@
 export enum ProductCategory {
-  All = "all",
-  Gaming = "gaming",
-  Creator = "creator",
-  Business = "business",
-  Desktop = "desktop",
+  ALL = "all",
+  GAMING = "gaming",
+  CREATOR = "creator",
+  BUSINESS = "business",
+  DESKTOP = "desktop",
 }

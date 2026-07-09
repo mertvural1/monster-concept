@@ -1,19 +1,12 @@
-import { Gamepad2, Headphones, Keyboard, MousePointer2 } from "lucide-react";
-
-const ecosystemItems = [
-  { icon: MousePointer2, label: "Pusat mouse", text: "Hızlı tepki ve ayarlanabilir DPI profilleri." },
-  { icon: Keyboard, label: "Mekanik klavye", text: "RGB, makro ve oyun modları tek panelde." },
-  { icon: Headphones, label: "7.1 kulaklık", text: "Konumsal ses ve düşük gecikmeli iletişim." },
-  { icon: Gamepad2, label: "Oyun paketleri", text: "Game Pass, güvenlik ve aksesuar bundle seçenekleri." },
-];
+import { ecosystemItems, ecosystemSectionCopy } from "@/features/showcase/data/ecosystem-section-data";
 
 export function EcosystemSection() {
   return (
     <section id="ecosystem" className="bg-mist py-20 text-ink">
       <div className="mx-auto max-w-[1180px] px-4">
         <div className="max-w-2xl">
-          <p className="text-xs font-black uppercase tracking-[0.24em] text-acid">Ekosistem</p>
-          <h2 className="mt-3 text-3xl font-black sm:text-5xl">Level atla, setini tamamla.</h2>
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-acid">{ecosystemSectionCopy.eyebrow}</p>
+          <h2 className="mt-3 text-3xl font-black sm:text-5xl">{ecosystemSectionCopy.title}</h2>
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-4">
           {ecosystemItems.map(({ icon: Icon, label, text }) => (

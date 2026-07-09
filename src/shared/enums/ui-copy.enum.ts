@@ -1,8 +1,8 @@
 export enum UiCopy {
-  BrandName = "MONSTER",
-  BrandSuffix = "Notebook",
-  CaseStudyLabel = "Frontend Case Study",
-  PrimaryCta = "Canavarını Seç",
-  SecondaryCta = "Konfigüre Et",
-  InstallApp = "Uygulamayı Yükle",
+  BRAND_NAME = "MONSTER",
+  BRAND_SUFFIX = "Notebook",
+  CASE_STUDY_LABEL = "Frontend Case Study",
+  PRIMARY_CTA = "Canavarını Seç",
+  SECONDARY_CTA = "Konfigüre Et",
+  INSTALL_APP = "Uygulamayı Yükle",
 }

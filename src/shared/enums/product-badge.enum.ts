@@ -1,6 +1,6 @@
 export enum ProductBadge {
-  Bestseller = "Çok Satan",
-  New = "Yeni",
-  Performance = "Performans",
-  Portable = "Taşınabilir",
+  BESTSELLER = "Çok Satan",
+  NEW = "Yeni",
+  PERFORMANCE = "Performans",
+  PORTABLE = "Taşınabilir",
 }

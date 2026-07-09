@@ -3,6 +3,7 @@
 import { Check, Cpu, HardDrive, MemoryStick } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import { configuratorCopy } from "@/features/configurator/data/configurator-copy";
 import {
   configuratorBasePrice,
   configuratorGroups,
@@ -34,18 +35,17 @@ export function BuildConfigurator() {
     <section id="configurator" className="bg-ink py-20 text-white">
       <div className="mx-auto grid max-w-[1180px] gap-8 px-4 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.24em] text-acid">Konfigüratör</p>
-          <h2 className="mt-3 text-3xl font-black sm:text-5xl">Kendi performans profilini kur.</h2>
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-acid">{configuratorCopy.eyebrow}</p>
+          <h2 className="mt-3 text-3xl font-black sm:text-5xl">{configuratorCopy.title}</h2>
           <p className="mt-5 max-w-xl text-sm leading-7 text-white/60">
-            Kullanıcının alışveriş kararını hızlandıran, canlı fiyat güncelleyen ve component state
-            yönetimini gösteren mini ürün oluşturucu.
+            {configuratorCopy.description}
           </p>
 
           <div className="mt-8 rounded border border-white/10 bg-white/[0.04] p-6">
-            <p className="text-sm font-bold text-white/60">Tahmini toplam</p>
+            <p className="text-sm font-bold text-white/60">{configuratorCopy.totalLabel}</p>
             <p className="mt-2 text-4xl font-black text-acid">{formatCurrency(totalPrice)}</p>
             <button className="mt-6 w-full rounded bg-acid px-5 py-3 text-sm font-black text-ink transition hover:bg-volt">
-              Yapılandırmayı Kaydet
+              {configuratorCopy.saveButton}
             </button>
           </div>
         </div>
@@ -92,7 +92,7 @@ export function BuildConfigurator() {
                           {option.description}
                         </span>
                         <span className="mt-4 block text-sm font-black text-acid">
-                          {option.priceDelta === 0 ? "Dahil" : `+ ${formatCurrency(option.priceDelta)}`}
+                          {option.priceDelta === 0 ? configuratorCopy.includedLabel : `+ ${formatCurrency(option.priceDelta)}`}
                         </span>
                       </button>
                     );
