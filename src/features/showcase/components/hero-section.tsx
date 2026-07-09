@@ -14,7 +14,7 @@ export function HeroSection() {
           <p className="text-xs font-black uppercase tracking-[0.26em] text-acid">
             {UiCopy.CASE_STUDY_LABEL}
           </p>
-          <h1 className="mt-5 max-w-3xl text-5xl font-black leading-[0.95] text-white sm:text-6xl lg:text-7xl">
+          <h1 className="mt-5 max-w-3xl text-3xl font-black leading-[0.95] text-white sm:text-5xl">
             {heroSectionCopy.title}
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-white/70">

@@ -5,14 +5,25 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus, ShoppingBag, Trash2, X, Zap } from "lucide-react";
 import Image from "next/image";
 
-import { useCart } from "@/features/cart/context/cart-context";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { cartDrawerCopy } from "@/features/cart/data/cart-drawer-data";
 import type { CartDrawerProps } from "@/features/cart/interfaces/cart-drawer-props.interface";
+import {
+  clearCart,
+  decrementItem,
+  incrementItem,
+  removeItem,
+  selectCartItems,
+  selectCartTotals,
+  selectLastAddedProductId,
+} from "@/features/cart/store/cart-slice";
 import { formatCurrency } from "@/shared/utils/format-currency";
 
 export function CartDrawer({ isOpen, onOpenChange }: CartDrawerProps) {
-  const { items, itemCount, subtotal, lastAddedProductId, incrementItem, decrementItem, removeItem, clearCart } =
-    useCart();
+  const dispatch = useAppDispatch();
+  const items = useAppSelector(selectCartItems);
+  const { itemCount, subtotal } = useAppSelector(selectCartTotals);
+  const lastAddedProductId = useAppSelector(selectLastAddedProductId);
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
@@ -111,7 +122,7 @@ export function CartDrawer({ isOpen, onOpenChange }: CartDrawerProps) {
                                     <div className="flex items-center rounded border border-white/10">
                                       <button
                                         className="grid size-9 place-items-center text-white/70 transition hover:text-acid"
-                                        onClick={() => decrementItem(item.product.id)}
+                                        onClick={() => dispatch(decrementItem(item.product.id))}
                                         aria-label={cartDrawerCopy.decrementAriaLabel}
                                       >
                                         <Minus size={15} />
@@ -121,7 +132,7 @@ export function CartDrawer({ isOpen, onOpenChange }: CartDrawerProps) {
                                       </span>
                                       <button
                                         className="grid size-9 place-items-center text-white/70 transition hover:text-acid"
-                                        onClick={() => incrementItem(item.product.id)}
+                                        onClick={() => dispatch(incrementItem(item.product.id))}
                                         aria-label={cartDrawerCopy.incrementAriaLabel}
                                       >
                                         <Plus size={15} />
@@ -129,7 +140,7 @@ export function CartDrawer({ isOpen, onOpenChange }: CartDrawerProps) {
                                     </div>
                                     <button
                                       className="grid size-9 place-items-center rounded border border-white/10 text-white/60 transition hover:border-red-300 hover:text-red-200"
-                                      onClick={() => removeItem(item.product.id)}
+                                      onClick={() => dispatch(removeItem(item.product.id))}
                                       aria-label={cartDrawerCopy.removeAriaLabel}
                                     >
                                       <Trash2 size={16} />
@@ -157,7 +168,7 @@ export function CartDrawer({ isOpen, onOpenChange }: CartDrawerProps) {
                   {items.length > 0 && (
                     <button
                       className="mt-3 w-full rounded border border-white/10 px-5 py-3 text-sm font-black text-white/70 transition hover:border-red-300 hover:text-red-200"
-                      onClick={clearCart}
+                      onClick={() => dispatch(clearCart())}
                     >
                       {cartDrawerCopy.clearButton}
                     </button>

@@ -1,4 +1,5 @@
 export const loginModalCopy = {
+  defaultDisplayName: "Monster Kullanıcısı",
   closeAriaLabel: "Modalı kapat",
   title: "Monster hesabına giriş yap",
   description:

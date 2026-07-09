@@ -4,10 +4,10 @@ import { Menu, Search, ShoppingCart, UserRound, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
+import { useAppSelector } from "@/app/hooks";
 import { LoginModal } from "@/features/auth/components/login-modal";
-import { useAuth } from "@/features/auth/context/auth-context";
 import { CartDrawer } from "@/features/cart/components/cart-drawer";
-import { useCart } from "@/features/cart/context/cart-context";
+import { selectCartTotals } from "@/features/cart/store/cart-slice";
 import { headerCopy } from "@/features/navigation/data/header-data";
 import { navItems } from "@/features/navigation/data/nav-items";
 import { ProductSearchModal } from "@/features/products/components/product-search-modal";
@@ -20,8 +20,8 @@ export function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const { user } = useAuth();
-  const { itemCount } = useCart();
+  const user = useAppSelector((state) => state.auth.user);
+  const { itemCount } = useAppSelector(selectCartTotals);
 
   const openLogin = () => {
     setIsOpen(false);

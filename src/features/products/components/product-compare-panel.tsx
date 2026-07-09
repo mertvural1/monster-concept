@@ -6,18 +6,25 @@ import { BarChart3, Plus, Trash2, X } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
-import { useCompare } from "@/features/products/context/compare-context";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { compareCopy, compareLimit } from "@/features/products/data/product-compare-data";
+import {
+  clearCompare,
+  removeCompareProduct,
+  selectCompareProducts,
+} from "@/features/products/store/compare-slice";
+import type { Product } from "@/shared/interfaces/product.interface";
 import { cn } from "@/shared/utils/cn";
 import { formatCurrency } from "@/shared/utils/format-currency";
 
-function getSpecLabels(selectedProducts: ReturnType<typeof useCompare>["selectedProducts"]) {
+function getSpecLabels(selectedProducts: Product[]) {
   return Array.from(new Set(selectedProducts.flatMap((product) => product.specs.map((spec) => spec.label))));
 }
 
 export function ProductComparePanel() {
   const [isTableOpen, setIsTableOpen] = useState(false);
-  const { selectedProducts, removeProduct, clearCompare } = useCompare();
+  const dispatch = useAppDispatch();
+  const selectedProducts = useAppSelector(selectCompareProducts);
   const specLabels = useMemo(() => getSpecLabels(selectedProducts), [selectedProducts]);
   const slots = Array.from({ length: compareLimit });
 
@@ -68,7 +75,7 @@ export function ProductComparePanel() {
                         </div>
                         <button
                           className="grid size-8 shrink-0 place-items-center rounded border border-white/10 text-white/60 transition hover:border-red-300 hover:text-red-200"
-                          onClick={() => removeProduct(product.id)}
+                          onClick={() => dispatch(removeCompareProduct(product.id))}
                           aria-label={compareCopy.removeAriaLabel}
                         >
                           <X size={15} />
@@ -97,7 +104,7 @@ export function ProductComparePanel() {
               </button>
               <button
                 className="grid size-11 place-items-center rounded border border-white/10 text-white/70 transition hover:border-red-300 hover:text-red-200"
-                onClick={clearCompare}
+                onClick={() => dispatch(clearCompare())}
                 aria-label={compareCopy.clearButton}
               >
                 <Trash2 size={18} />

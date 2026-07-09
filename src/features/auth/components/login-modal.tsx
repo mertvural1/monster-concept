@@ -2,22 +2,42 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { AnimatePresence, motion } from "framer-motion";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { Chrome, Loader2, LogOut, ShieldCheck, X } from "lucide-react";
 import Image from "next/image";
 
-import { useAuth } from "@/features/auth/context/auth-context";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { loginModalCopy } from "@/features/auth/data/login-modal-data";
 import type { LoginModalProps } from "@/features/auth/interfaces/login-modal-props.interface";
+import { getFirebaseAuth, getGoogleProvider } from "@/features/auth/services/firebase-client";
+import { clearAuthError, setAuthError } from "@/features/auth/store/auth-slice";
+import { FirebaseErrorMessage } from "@/shared/enums/firebase-error.enum";
 
 export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
-  const { user, isLoading, errorMessage, loginWithGoogle, logout, clearAuthError } = useAuth();
+  const dispatch = useAppDispatch();
+  const { user, isLoading, errorMessage } = useAppSelector((state) => state.auth);
+
+  const loginWithGoogle = async () => {
+    dispatch(clearAuthError());
+
+    try {
+      await signInWithPopup(getFirebaseAuth(), getGoogleProvider());
+    } catch {
+      dispatch(setAuthError(FirebaseErrorMessage.LOGIN_FAILED));
+    }
+  };
+
+  const logout = async () => {
+    dispatch(clearAuthError());
+    await signOut(getFirebaseAuth());
+  };
 
   return (
     <Dialog.Root
       open={isOpen}
       onOpenChange={(nextOpen) => {
         onOpenChange(nextOpen);
-        clearAuthError();
+        dispatch(clearAuthError());
       }}
     >
       <AnimatePresence>

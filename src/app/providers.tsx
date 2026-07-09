@@ -1,17 +1,16 @@
 "use client";
 
+import { Provider } from "react-redux";
 import type { ReactNode } from "react";
 
-import { AuthProvider } from "@/features/auth/context/auth-context";
-import { CartProvider } from "@/features/cart/context/cart-context";
-import { CompareProvider } from "@/features/products/context/compare-context";
+import { store } from "@/app/store";
+import { AuthStateListener } from "@/features/auth/components/auth-state-listener";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <CompareProvider>{children}</CompareProvider>
-      </CartProvider>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthStateListener />
+      {children}
+    </Provider>
   );
 }

@@ -7,11 +7,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
-import { useCart } from "@/features/cart/context/cart-context";
-import { useCompare } from "@/features/products/context/compare-context";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { addItem } from "@/features/cart/store/cart-slice";
 import { productSearchCopy, popularSearchTerms } from "@/features/products/data/product-search-data";
 import { products } from "@/features/products/data/products";
 import type { ProductSearchModalProps } from "@/features/products/interfaces/product-search-modal-props.interface";
+import {
+  selectCanAddMoreCompareProducts,
+  selectCompareProductIds,
+  toggleCompareProduct,
+} from "@/features/products/store/compare-slice";
 import { searchProducts } from "@/features/products/utils/search-products";
 import { AppRoute } from "@/shared/enums/app-route.enum";
 import type { Product } from "@/shared/interfaces/product.interface";
@@ -28,8 +33,9 @@ function getPreviewProducts(query: string, searchResults: Product[]) {
 
 export function ProductSearchModal({ isOpen, onOpenChange }: ProductSearchModalProps) {
   const [query, setQuery] = useState("");
-  const { addItem } = useCart();
-  const { isSelected, toggleProduct, canAddMore } = useCompare();
+  const dispatch = useAppDispatch();
+  const selectedProductIds = useAppSelector(selectCompareProductIds);
+  const canAddMore = useAppSelector(selectCanAddMoreCompareProducts);
   const searchResults = useMemo(() => searchProducts(products, query), [query]);
   const visibleProducts = getPreviewProducts(query, searchResults);
   const hasQuery = Boolean(query.trim());
@@ -116,7 +122,7 @@ export function ProductSearchModal({ isOpen, onOpenChange }: ProductSearchModalP
                         </p>
                       )}
                       {visibleProducts.map((product) => {
-                        const selected = isSelected(product.id);
+                        const selected = selectedProductIds.includes(product.id);
                         const compareDisabled = !selected && !canAddMore;
 
                         return (
@@ -151,7 +157,7 @@ export function ProductSearchModal({ isOpen, onOpenChange }: ProductSearchModalP
                                         : "border-white/10 text-white/70 hover:border-acid hover:text-acid",
                                       compareDisabled && "cursor-not-allowed opacity-45",
                                     )}
-                                    onClick={() => toggleProduct(product)}
+                                    onClick={() => dispatch(toggleCompareProduct(product))}
                                     disabled={compareDisabled}
                                   >
                                     {selected ? <Check size={15} /> : <SlidersHorizontal size={15} />}
@@ -159,7 +165,7 @@ export function ProductSearchModal({ isOpen, onOpenChange }: ProductSearchModalP
                                   </button>
                                   <button
                                     className="grid size-9 place-items-center rounded bg-acid text-ink transition hover:bg-volt"
-                                    onClick={() => addItem(product)}
+                                    onClick={() => dispatch(addItem(product))}
                                     aria-label={productSearchCopy.addToCart}
                                   >
                                     <ShoppingCart size={17} />

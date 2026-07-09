@@ -5,24 +5,31 @@ import { Check, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-import { useCart } from "@/features/cart/context/cart-context";
-import { useCompare } from "@/features/products/context/compare-context";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { addItem, selectLastAddedProductId } from "@/features/cart/store/cart-slice";
 import { compareCopy } from "@/features/products/data/product-compare-data";
 import { productCardCopy } from "@/features/products/data/product-card-data";
 import type { ProductCardProps } from "@/features/products/interfaces/product-card-props.interface";
+import {
+  selectCanAddMoreCompareProducts,
+  selectCompareProductIds,
+  toggleCompareProduct,
+} from "@/features/products/store/compare-slice";
 import { cn } from "@/shared/utils/cn";
 import { formatCurrency } from "@/shared/utils/format-currency";
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { addItem, lastAddedProductId } = useCart();
-  const { isSelected, toggleProduct, canAddMore } = useCompare();
+  const dispatch = useAppDispatch();
+  const lastAddedProductId = useAppSelector(selectLastAddedProductId);
+  const selectedProductIds = useAppSelector(selectCompareProductIds);
+  const canAddMore = useAppSelector(selectCanAddMoreCompareProducts);
   const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
   const isLastAdded = lastAddedProductId === product.id;
-  const isCompareSelected = isSelected(product.id);
+  const isCompareSelected = selectedProductIds.includes(product.id);
   const isCompareDisabled = !isCompareSelected && !canAddMore;
 
   const handleAddItem = () => {
-    addItem(product);
+    dispatch(addItem(product));
     setIsFeedbackVisible(true);
     window.setTimeout(() => setIsFeedbackVisible(false), 1100);
   };
@@ -96,7 +103,7 @@ export function ProductCard({ product }: ProductCardProps) {
                   : "border-black/10 bg-white text-ink/62 hover:border-acid hover:text-ink",
                 isCompareDisabled && "cursor-not-allowed opacity-45",
               )}
-              onClick={() => toggleProduct(product)}
+              onClick={() => dispatch(toggleCompareProduct(product))}
               disabled={isCompareDisabled}
               title={isCompareDisabled ? compareCopy.limitLabel : compareCopy.addButton}
             >

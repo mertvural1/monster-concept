@@ -33,7 +33,7 @@ export function ProductExplorer() {
             <p className="text-xs font-black uppercase tracking-[0.24em] text-acid">{productExplorerCopy.eyebrow}</p>
             <h2 className="mt-3 text-3xl font-black sm:text-5xl">{productExplorerCopy.title}</h2>
           </div>
-          <div className="flex items-center gap-2 overflow-x-auto pb-2">
+          <div className="flex items-center gap-1 overflow-x-auto pb-2">
             <SlidersHorizontal className="hidden text-ink/40 sm:block" size={18} />
             {productCategories.map((category) => (
               <button
