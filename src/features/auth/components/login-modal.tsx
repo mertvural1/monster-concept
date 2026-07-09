@@ -53,10 +53,10 @@ export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
             </Dialog.Overlay>
             <Dialog.Content asChild>
               <motion.div
-                className="fixed left-1/2 top-1/2 z-[90] w-[calc(100vw-32px)] max-w-[430px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded border border-white/10 bg-graphite text-white shadow-2xl"
-                initial={{ opacity: 0, scale: 0.94, y: 18 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.94, y: 18 }}
+                className="fixed left-1/2 top-1/2 z-[90] flex max-h-[calc(100dvh-32px)] w-[calc(100vw-32px)] max-w-[430px] flex-col overflow-hidden rounded border border-white/10 bg-graphite text-white shadow-2xl"
+                initial={{ opacity: 0, scale: 0.94, x: "-50%", y: "calc(-50% + 18px)" }}
+                animate={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
+                exit={{ opacity: 0, scale: 0.94, x: "-50%", y: "calc(-50% + 18px)" }}
                 transition={{ type: "spring", stiffness: 280, damping: 24 }}
               >
                 <div className="relative border-b border-white/10 p-6">
@@ -72,7 +72,7 @@ export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
                   </Dialog.Description>
                 </div>
 
-                <div className="p-6">
+                <div className="overflow-y-auto p-6">
                   {user ? (
                     <div>
                       <div className="flex items-center gap-4 rounded border border-white/10 bg-white/[0.04] p-4">

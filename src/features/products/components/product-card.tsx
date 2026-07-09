@@ -66,11 +66,11 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <div className="mt-5 flex flex-1 flex-col">
         <div className="flex items-start justify-between gap-3">
-          <div>
+          <div className="min-w-0">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-acid">{product.family}</p>
-            <h3 className="mt-2 text-xl font-black text-ink">{product.name}</h3>
+            <h3 className="mt-2 text-xl font-black leading-tight text-ink">{product.name}</h3>
           </div>
-          <div className="flex items-center gap-1 text-sm font-black text-ink">
+          <div className="flex shrink-0 items-center gap-1 text-sm font-black text-ink">
             <Star className="fill-acid text-acid" size={16} />
             {product.rating}
           </div>
@@ -79,8 +79,8 @@ export function ProductCard({ product }: ProductCardProps) {
         <dl className="mt-5 grid gap-2">
           {product.specs.map((spec) => (
             <div key={spec.label} className="flex justify-between gap-4 border-b border-black/10 pb-2 text-sm">
-              <dt className="text-ink/50">{spec.label}</dt>
-              <dd className="font-bold text-ink">{spec.value}</dd>
+              <dt className="shrink-0 text-ink/50">{spec.label}</dt>
+              <dd className="min-w-0 text-right font-bold text-ink">{spec.value}</dd>
             </div>
           ))}
         </dl>
@@ -89,7 +89,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <p className="text-2xl font-black text-ink">{formatCurrency(product.price)}</p>
           <div className="mt-4 grid gap-2 sm:grid-cols-[1fr_auto]">
             <button
-              className="inline-flex w-full items-center justify-center gap-2 rounded bg-ink px-4 py-3 text-sm font-black text-white transition hover:bg-acid hover:text-ink"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded bg-ink px-4 py-3 text-center text-sm font-black text-white transition hover:bg-acid hover:text-ink"
               onClick={handleAddItem}
             >
               {isFeedbackVisible ? <Check size={18} /> : <ShoppingCart size={18} />}
@@ -97,7 +97,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </button>
             <button
               className={cn(
-                "inline-flex items-center justify-center rounded border px-4 py-3 text-sm font-black transition",
+                "inline-flex min-h-11 items-center justify-center rounded border px-4 py-3 text-center text-sm font-black transition",
                 isCompareSelected
                   ? "border-acid bg-acid text-ink"
                   : "border-black/10 bg-white text-ink/62 hover:border-acid hover:text-ink",

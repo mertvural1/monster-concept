@@ -35,7 +35,7 @@ export function ProductComparePanel() {
   return (
     <>
       <motion.div
-        className="fixed inset-x-0 bottom-4 z-40 px-4"
+        className="fixed inset-x-0 bottom-4 z-40 max-h-[calc(100dvh-32px)] overflow-y-auto px-4"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
       >
@@ -128,10 +128,10 @@ export function ProductComparePanel() {
               </Dialog.Overlay>
               <Dialog.Content asChild>
                 <motion.div
-                  className="fixed left-1/2 top-1/2 z-[90] flex max-h-[calc(100vh-48px)] w-[calc(100vw-32px)] max-w-[980px] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded border border-white/10 bg-graphite text-white shadow-2xl"
-                  initial={{ opacity: 0, scale: 0.96, y: 12 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.96, y: 12 }}
+                  className="fixed left-1/2 top-1/2 z-[90] flex max-h-[calc(100dvh-32px)] w-[calc(100vw-32px)] max-w-[980px] flex-col overflow-hidden rounded border border-white/10 bg-graphite text-white shadow-2xl sm:max-h-[calc(100dvh-48px)]"
+                  initial={{ opacity: 0, scale: 0.96, x: "-50%", y: "calc(-50% + 12px)" }}
+                  animate={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
+                  exit={{ opacity: 0, scale: 0.96, x: "-50%", y: "calc(-50% + 12px)" }}
                 >
                   <div className="flex items-start justify-between gap-4 border-b border-white/10 p-5">
                     <div>

@@ -40,7 +40,7 @@ export function CartDrawer({ isOpen, onOpenChange }: CartDrawerProps) {
             </Dialog.Overlay>
             <Dialog.Content asChild>
               <motion.aside
-                className="fixed bottom-0 right-0 top-0 z-[90] flex w-full max-w-[470px] flex-col border-l border-white/10 bg-ink text-white shadow-2xl"
+                className="fixed bottom-0 right-0 top-0 z-[90] flex h-dvh w-full max-w-[470px] flex-col border-l border-white/10 bg-ink text-white shadow-2xl"
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}

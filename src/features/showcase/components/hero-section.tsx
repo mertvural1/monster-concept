@@ -9,7 +9,7 @@ import { UiCopy } from "@/shared/enums/ui-copy.enum";
 export function HeroSection() {
   return (
     <section className="overflow-hidden bg-ink text-white">
-      <div className="mx-auto grid min-h-[calc(100vh-104px)] max-w-[1180px] items-center gap-10 px-4 py-12 lg:grid-cols-[0.94fr_1.06fr]">
+      <div className="mx-auto grid min-h-[calc(100dvh-104px)] max-w-[1180px] items-center gap-8 px-4 py-10 sm:gap-10 sm:py-12 lg:grid-cols-[0.94fr_1.06fr]">
         <div className="relative z-10">
           <p className="text-xs font-black uppercase tracking-[0.26em] text-acid">
             {UiCopy.CASE_STUDY_LABEL}
@@ -45,7 +45,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative min-h-[440px]">
+        <div className="relative min-h-[300px] sm:min-h-[440px]">
           <div className="absolute inset-x-4 bottom-6 top-10 rounded-full bg-acid/20 blur-3xl" />
           <div className="relative mx-auto flex h-full max-w-[620px] items-center justify-center">
             <Image
@@ -57,9 +57,9 @@ export function HeroSection() {
               className="drop-shadow-[0_50px_80px_rgba(0,0,0,0.55)]"
             />
           </div>
-          <div className="absolute bottom-8 left-2 rounded border border-white/10 bg-white/[0.08] p-4 backdrop-blur md:left-8">
+          <div className="absolute bottom-4 left-2 max-w-[calc(100%-16px)] rounded border border-white/10 bg-white/[0.08] p-3 backdrop-blur sm:bottom-8 sm:p-4 md:left-8">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-acid">{heroSectionCopy.productSeries}</p>
-            <p className="mt-1 text-2xl font-black">{heroSectionCopy.productSpecs}</p>
+            <p className="mt-1 text-xl font-black sm:text-2xl">{heroSectionCopy.productSpecs}</p>
           </div>
         </div>
       </div>
