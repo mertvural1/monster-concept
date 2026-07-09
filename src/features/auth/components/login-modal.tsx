@@ -12,6 +12,7 @@ import type { LoginModalProps } from "@/features/auth/interfaces/login-modal-pro
 import { getFirebaseAuth, getGoogleProvider } from "@/features/auth/services/firebase-client";
 import { clearAuthError, setAuthError } from "@/features/auth/store/auth-slice";
 import { FirebaseErrorMessage } from "@/shared/enums/firebase-error.enum";
+import { getUserInitials } from "@/shared/utils/get-user-initials";
 
 export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
 
     try {
       await signInWithPopup(getFirebaseAuth(), getGoogleProvider());
+      onOpenChange(false);
     } catch {
       dispatch(setAuthError(FirebaseErrorMessage.LOGIN_FAILED));
     }
@@ -86,7 +88,7 @@ export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
                           />
                         ) : (
                           <div className="grid size-12 place-items-center rounded-full bg-acid text-sm font-black text-ink">
-                            {user.displayName.charAt(0)}
+                            {getUserInitials(user.displayName, "M")}
                           </div>
                         )}
                         <div className="min-w-0">

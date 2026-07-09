@@ -11,4 +11,5 @@ export const headerCopy = {
   openMenuAriaLabel: "Menüyü aç",
   googleLoginLabel: "Google ile Giriş",
   cartLabel: "Sepetim",
+  logoutLabel: "\u00c7\u0131k\u0131\u015f yap",
 };

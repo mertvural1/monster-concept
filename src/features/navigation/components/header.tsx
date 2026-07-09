@@ -1,11 +1,13 @@
 "use client";
 
-import { Menu, Search, ShoppingCart, UserRound, X } from "lucide-react";
+import { signOut } from "firebase/auth";
+import { LogOut, Menu, Search, ShoppingCart, UserRound, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
 import { useAppSelector } from "@/app/hooks";
 import { LoginModal } from "@/features/auth/components/login-modal";
+import { getFirebaseAuth } from "@/features/auth/services/firebase-client";
 import { CartDrawer } from "@/features/cart/components/cart-drawer";
 import { selectCartTotals } from "@/features/cart/store/cart-slice";
 import { headerCopy } from "@/features/navigation/data/header-data";
@@ -14,6 +16,7 @@ import { ProductSearchModal } from "@/features/products/components/product-searc
 import { AppRoute } from "@/shared/enums/app-route.enum";
 import { UiCopy } from "@/shared/enums/ui-copy.enum";
 import { cn } from "@/shared/utils/cn";
+import { getUserInitials } from "@/shared/utils/get-user-initials";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +25,7 @@ export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const user = useAppSelector((state) => state.auth.user);
   const { itemCount } = useAppSelector(selectCartTotals);
+  const userInitials = user ? getUserInitials(user.displayName) : "";
 
   const openLogin = () => {
     setIsOpen(false);
@@ -36,6 +40,12 @@ export function Header() {
   const openSearch = () => {
     setIsOpen(false);
     setIsSearchOpen(true);
+  };
+
+  const logout = async () => {
+    setIsOpen(false);
+    setIsLoginOpen(false);
+    await signOut(getFirebaseAuth());
   };
 
   return (
@@ -77,8 +87,21 @@ export function Header() {
             aria-label={user ? headerCopy.accountAriaLabel : headerCopy.loginAriaLabel}
             onClick={openLogin}
           >
-            <UserRound size={18} />
+            {user ? (
+              <span className="text-xs font-black uppercase leading-none">{userInitials}</span>
+            ) : (
+              <UserRound size={18} />
+            )}
           </button>
+          {user && (
+            <button
+              className="grid size-10 place-items-center rounded border border-white/10 text-white/75 transition hover:border-red-300 hover:text-red-200"
+              aria-label={headerCopy.logoutLabel}
+              onClick={logout}
+            >
+              <LogOut size={18} />
+            </button>
+          )}
           <button
             className="relative grid size-10 place-items-center rounded border border-white/10 text-white/75 transition hover:border-acid hover:text-acid"
             aria-label={headerCopy.cartAriaLabel}
@@ -127,10 +150,17 @@ export function Header() {
             {headerCopy.searchAriaLabel}
           </button>
           <button
-            className="rounded border border-white/10 px-4 py-3 text-left text-sm font-bold text-white/80"
+            className="flex items-center justify-between gap-3 rounded border border-white/10 px-4 py-3 text-left text-sm font-bold text-white/80"
             onClick={openLogin}
           >
-            {user ? headerCopy.accountAriaLabel : headerCopy.googleLoginLabel}
+            <span className="min-w-0 truncate">
+              {user ? user.displayName : headerCopy.googleLoginLabel}
+            </span>
+            {user && (
+              <span className="grid size-8 shrink-0 place-items-center rounded bg-acid text-xs font-black uppercase text-ink">
+                {userInitials}
+              </span>
+            )}
           </button>
           <button
             className="rounded border border-white/10 px-4 py-3 text-left text-sm font-bold text-white/80"
@@ -138,6 +168,15 @@ export function Header() {
           >
             {headerCopy.cartLabel} {itemCount > 0 ? `(${itemCount})` : ""}
           </button>
+          {user && (
+            <button
+              className="flex items-center gap-3 rounded border border-white/10 px-4 py-3 text-left text-sm font-bold text-white/80 transition hover:border-red-300 hover:text-red-200"
+              onClick={logout}
+            >
+              <LogOut size={18} />
+              {headerCopy.logoutLabel}
+            </button>
+          )}
         </nav>
       </div>
 
