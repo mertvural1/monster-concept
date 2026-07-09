@@ -3,7 +3,7 @@
 import { signOut } from "firebase/auth";
 import { LogOut, Menu, Search, ShoppingCart, UserRound, X } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useAppSelector } from "@/app/hooks";
 import { LoginModal } from "@/features/auth/components/login-modal";
@@ -23,9 +23,35 @@ export function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [campaignText, setCampaignText] = useState("");
   const user = useAppSelector((state) => state.auth.user);
   const { itemCount } = useAppSelector(selectCartTotals);
   const userInitials = user ? getUserInitials(user.displayName) : "";
+
+  useEffect(() => {
+    const text = headerCopy.campaignBar;
+    const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (shouldReduceMotion) {
+      setCampaignText(text);
+      return;
+    }
+
+    setCampaignText("");
+
+    const intervalId = window.setInterval(() => {
+      setCampaignText((currentText) => {
+        if (currentText.length >= text.length) {
+          window.clearInterval(intervalId);
+          return currentText;
+        }
+
+        return text.slice(0, currentText.length + 1);
+      });
+    }, 46);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   const openLogin = () => {
     setIsOpen(false);
@@ -51,11 +77,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-ink/90 backdrop-blur-xl">
       <div className="bg-acid py-2 text-center text-xs font-black uppercase tracking-[0.18em] text-ink">
-        {headerCopy.campaignBar}
+        <span className="inline-flex min-h-4 items-center justify-center px-4">
+          <span>{campaignText}</span>
+          <span className="typewriter-caret ml-1 h-4 w-0.5 bg-ink" aria-hidden="true" />
+        </span>
       </div>
       <div className="mx-auto flex max-w-[1180px] items-center justify-between px-4 py-4">
         <Link href={AppRoute.HOME} className="flex items-end gap-2" aria-label={headerCopy.homeAriaLabel}>
-          <span className="text-2xl font-black tracking-wide text-acid">{UiCopy.BRAND_NAME}</span>
+          <span className="logo-shine text-2xl font-black tracking-wide text-acid">{UiCopy.BRAND_NAME}</span>
           <span className="hidden text-sm font-semibold text-white/70 sm:block">{UiCopy.BRAND_SUFFIX}</span>
         </Link>
 

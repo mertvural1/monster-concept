@@ -33,6 +33,66 @@ img {
   max-width: 100%;
 }
 
+.logo-shine {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  text-shadow: 0 0 18px rgba(126, 211, 33, 0.28);
+}
+
+.logo-shine::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 34%,
+    rgba(255, 255, 255, 0.86) 48%,
+    transparent 62%,
+    transparent 100%
+  );
+  transform: translateX(-125%);
+  animation: logo-shine 3.8s ease-in-out infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.typewriter-caret {
+  animation: typewriter-caret 0.9s steps(1, end) infinite;
+}
+
+@keyframes logo-shine {
+  0%,
+  42% {
+    transform: translateX(-125%);
+  }
+
+  72%,
+  100% {
+    transform: translateX(125%);
+  }
+}
+
+@keyframes typewriter-caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-shine::after,
+  .typewriter-caret {
+    animation: none;
+  }
+}
+
 ::selection {
   background: #7ed321;
   color: #111315;
