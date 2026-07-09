@@ -1,0 +1,96 @@
+import { ProductBadge } from "@/shared/enums/product-badge.enum";
+import { ProductCategory } from "@/shared/enums/product-category.enum";
+import type { Product } from "@/shared/interfaces/product.interface";
+
+export const products: Product[] = [
+  {
+    id: "abra-a5-v21",
+    name: "Abra A5 V21.6.4",
+    family: "Abra",
+    price: 39999,
+    rating: 5,
+    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/new-mmenu-abra.png",
+    category: ProductCategory.Gaming,
+    badge: ProductBadge.Bestseller,
+    specs: [
+      { label: "GPU", value: "RTX 5050" },
+      { label: "CPU", value: "Intel Core i5" },
+      { label: "Ekran", value: "15.6 inç 144Hz" },
+    ],
+  },
+  {
+    id: "tulpar-t7-v26",
+    name: "Tulpar T7 V26.1",
+    family: "Tulpar",
+    price: 72999,
+    rating: 4.8,
+    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/new-mmenu-tulpar.png",
+    category: ProductCategory.Gaming,
+    badge: ProductBadge.Performance,
+    specs: [
+      { label: "GPU", value: "RTX 5070" },
+      { label: "CPU", value: "Intel Core Ultra 9" },
+      { label: "Ekran", value: "17.3 inç QHD" },
+    ],
+  },
+  {
+    id: "semruk-s6",
+    name: "Semruk S6 V1",
+    family: "Semruk",
+    price: 129999,
+    rating: 4.9,
+    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/semruk_S6_v1_400x400.png",
+    category: ProductCategory.Creator,
+    badge: ProductBadge.New,
+    specs: [
+      { label: "GPU", value: "RTX 5090" },
+      { label: "CPU", value: "Intel Core Ultra 9" },
+      { label: "RAM", value: "64GB DDR5" },
+    ],
+  },
+  {
+    id: "huma-h5",
+    name: "Huma H5 V4",
+    family: "Huma",
+    price: 32999,
+    rating: 4.7,
+    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/mmenunew-Huma.png",
+    category: ProductCategory.Business,
+    badge: ProductBadge.Portable,
+    specs: [
+      { label: "Ağırlık", value: "1.4 kg" },
+      { label: "CPU", value: "Intel Core Ultra 7" },
+      { label: "Pil", value: "Tüm gün" },
+    ],
+  },
+  {
+    id: "markut-m7",
+    name: "Markut M7 V2",
+    family: "Markut",
+    price: 48999,
+    rating: 4.6,
+    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/mmenu-markut-new.png",
+    category: ProductCategory.Creator,
+    badge: ProductBadge.New,
+    specs: [
+      { label: "Ekran", value: "16 inç OLED" },
+      { label: "CPU", value: "AMD Ryzen AI" },
+      { label: "Depolama", value: "1TB SSD" },
+    ],
+  },
+  {
+    id: "tulpar-desktop",
+    name: "Tulpar Masaüstü",
+    family: "Desktop",
+    price: 84999,
+    rating: 4.8,
+    imageUrl: "https://cdn.monsternotebook.com.tr//monsternotebook-tr/UPLOAD/Menu/pc-header/desktop-4.png",
+    category: ProductCategory.Desktop,
+    badge: ProductBadge.Performance,
+    specs: [
+      { label: "GPU", value: "RTX 5080" },
+      { label: "Soğutma", value: "360mm sıvı" },
+      { label: "Güç", value: "1000W Gold" },
+    ],
+  },
+];

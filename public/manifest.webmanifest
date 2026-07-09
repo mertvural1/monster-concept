@@ -1,0 +1,18 @@
+{
+  "name": "Monster Notebook Redesign",
+  "short_name": "Monster UI",
+  "description": "Next.js, TypeScript, Tailwind CSS ve PWA destekli Monster Notebook arayüz çalışması.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111315",
+  "theme_color": "#7ed321",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
